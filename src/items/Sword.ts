@@ -1,4 +1,3 @@
-import { uuid } from 'uuidv4';
 import { EquipableSlots, ItemTypes } from '@items/types';
 import Weapon, { IWeapon } from '@models/items/Weapon';
 
@@ -9,7 +8,6 @@ export const createSword = async (
   baseDamage: number
 ): Promise<IWeapon> => {
   const newSword = new Weapon({
-    uniqueId: uuid(),
     name,
     itemType: ItemTypes.Weapon,
     equipmentSlot,

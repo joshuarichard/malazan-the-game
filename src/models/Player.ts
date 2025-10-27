@@ -5,7 +5,7 @@ export interface IPlayer extends Document {
   health: number;
   level: number;
   experience: number;
-  inventory: string[]; // Placeholder for item IDs or references
+  inventory: string[];
   equipment: {
     weapon: string | null;
     shield: string | null;

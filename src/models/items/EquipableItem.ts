@@ -1,9 +1,9 @@
 import mongoose, { Schema } from 'mongoose';
 import Item, { IItem } from './Item';
-import { EquipableSlots, ItemTypes } from '@items/types'; // Import ItemTypes as well
+import { EquipableSlots, ItemTypes } from '@items/types';
 
 export interface IEquipableItem extends IItem {
-  itemType: ItemTypes; // Equipable items can be Weapon or Armour
+  itemType: ItemTypes;
   equipmentSlot: EquipableSlots;
 }
 

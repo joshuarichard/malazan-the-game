@@ -1,17 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
-import Item, { IItem } from './Item'; // Import Item directly
-import { ItemTypes, EquipableSlots } from '@items/types'; // Need EquipableSlots for the schema
+import Item, { IItem } from './Item';
+import { ItemTypes, EquipableSlots } from '@items/types';
 
 export interface IArmour extends IItem {
-  // Extend IItem directly
   itemType: ItemTypes.Armour;
-  equipmentSlot: EquipableSlots; // Add equipmentSlot here
+  equipmentSlot: EquipableSlots;
   baseDefense: number;
 }
 
 const ArmourSchema: Schema = new Schema({
   equipmentSlot: {
-    // Add equipmentSlot to the schema
     type: String,
     enum: Object.values(EquipableSlots),
     required: true,
@@ -19,5 +17,5 @@ const ArmourSchema: Schema = new Schema({
   baseDefense: { type: Number, required: true, default: 0 },
 });
 
-const Armour = Item.discriminator<IArmour>('Armour', ArmourSchema); // Discriminator of Item
+const Armour = Item.discriminator<IArmour>('Armour', ArmourSchema);
 export default Armour;

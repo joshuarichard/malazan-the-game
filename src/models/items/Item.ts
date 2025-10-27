@@ -1,8 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose';
-import { ItemTypes, EquipableSlots } from '@items/types'; // Assuming types are still needed for enums
+import { ItemTypes } from '@items/types';
 
 export interface IItem extends Document {
-  uniqueId: string;
   name: string;
   itemType: ItemTypes;
   weight: number;
@@ -10,7 +9,6 @@ export interface IItem extends Document {
 
 const ItemSchema: Schema = new Schema(
   {
-    uniqueId: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     itemType: { type: String, enum: Object.values(ItemTypes), required: true },
     weight: { type: Number, required: true, default: 0 },

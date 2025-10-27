@@ -1,4 +1,3 @@
-import { uuid } from 'uuidv4';
 import { EquipableSlots, ItemTypes } from '@items/types';
 import Armour, { IArmour } from '@models/items/Armour';
 
@@ -9,7 +8,6 @@ export const createShield = async (
   baseDefense: number
 ): Promise<IArmour> => {
   const newShield = new Armour({
-    uniqueId: uuid(),
     name,
     itemType: ItemTypes.Armour,
     equipmentSlot,
