@@ -1,12 +1,17 @@
 import { EquipableSlots, ItemTypes } from '@items/types';
 import Armour, { IArmour } from '@models/items/Armour';
 
-export const createShield = async (
-  name: string,
-  equipmentSlot: EquipableSlots,
-  weight: number,
-  baseDefense: number
-): Promise<IArmour> => {
+export const createShield = async ({
+  name,
+  equipmentSlot,
+  weight,
+  baseDefense,
+}: {
+  name: string;
+  equipmentSlot: EquipableSlots;
+  weight: number;
+  baseDefense: number;
+}): Promise<IArmour> => {
   const newShield = new Armour({
     name,
     itemType: ItemTypes.Armour,

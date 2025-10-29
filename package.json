@@ -13,8 +13,10 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@types/mongoose": "^5.11.96",
+    "@types/readline-sync": "^1.4.8",
     "dotenv": "^17.2.3",
     "mongoose": "^8.19.2",
+    "readline-sync": "^1.4.10",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {

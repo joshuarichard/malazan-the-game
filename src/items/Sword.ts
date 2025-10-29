@@ -1,12 +1,17 @@
 import { EquipableSlots, ItemTypes } from '@items/types';
 import Weapon, { IWeapon } from '@models/items/Weapon';
 
-export const createSword = async (
-  name: string,
-  equipmentSlot: EquipableSlots,
-  weight: number,
-  baseDamage: number
-): Promise<IWeapon> => {
+export const createSword = async ({
+  name,
+  equipmentSlot,
+  weight,
+  baseDamage,
+}: {
+  name: string;
+  equipmentSlot: EquipableSlots;
+  weight: number;
+  baseDamage: number;
+}): Promise<IWeapon> => {
   const newSword = new Weapon({
     name,
     itemType: ItemTypes.Weapon,

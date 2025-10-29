@@ -31,12 +31,12 @@ export const runExamples = async () => {
 
   // Example: Create a new sword
   try {
-    const dragnipur = await createSword(
-      'Dragnipur',
-      EquipableSlots.TwoHanded,
-      3,
-      5
-    );
+    const dragnipur = await createSword({
+      name: 'Dragnipur',
+      equipmentSlot: EquipableSlots.TwoHanded,
+      weight: 3,
+      baseDamage: 5,
+    });
     console.log('Created sword:', dragnipur.name);
   } catch (error: any) {
     console.error('Error creating sword:', error.message);
@@ -44,12 +44,12 @@ export const runExamples = async () => {
 
   // Example: Create a new shield
   try {
-    const shieldOfTheFallen = await createShield(
-      'Shield of the Fallen',
-      EquipableSlots.OneHanded,
-      5,
-      10
-    );
+    const shieldOfTheFallen = await createShield({
+      name: 'Shield of the Fallen',
+      equipmentSlot: EquipableSlots.OneHanded,
+      weight: 5,
+      baseDefense: 10,
+    });
     console.log('Created shield:', shieldOfTheFallen.name);
   } catch (error: any) {
     console.error('Error creating shield:', error.message);
