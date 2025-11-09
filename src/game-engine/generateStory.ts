@@ -1,29 +1,12 @@
-import {
-  ChatSession,
-  GenerativeModel,
-  GoogleGenerativeAI,
-} from '@google/generative-ai';
+import { ChatSession, GenerativeModel } from '@google/generative-ai';
 import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 
-import Story from '@models/Story';
-import { parseTemplate } from 'utils/templateParser'; // Import the template parser
-import { getUserInput } from 'utils/input';
+import Story, { IStory } from '@models/Story';
+import { parseTemplate, getUserInput, initializeGemini } from '../utils';
+import { cleanChatHistory } from './gameLoop';
 
 dotenv.config();
-
-const initializeGemini = async (): Promise<GenerativeModel> => {
-  const geminiApiKey = process.env.GEMINI_API_KEY;
-  if (!geminiApiKey) {
-    console.error('GEMINI_API_KEY is not set in environment variables.');
-    process.exit(1);
-  }
-
-  const genAI = new GoogleGenerativeAI(geminiApiKey);
-  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
-
-  return model;
-};
 
 const getPromptFromFile = (
   filePath: string,
@@ -50,19 +33,21 @@ const initializeChat = (model: GenerativeModel): ChatSession => {
 
   console.log('Generating story with opening chat..');
 
+  const initialHistory = [
+    {
+      role: 'user',
+      parts: [{ text: prompt }],
+    },
+  ];
+
   const chat = model.startChat({
-    history: [
-      {
-        role: 'user',
-        parts: [{ text: prompt }],
-      },
-    ],
+    history: cleanChatHistory(initialHistory),
   });
 
   return chat;
 };
 
-export const generateStory = async () => {
+export const generateStory = async (): Promise<IStory | null> => {
   try {
     const model = await initializeGemini();
     const chat = initializeChat(model);
@@ -76,14 +61,14 @@ export const generateStory = async () => {
 
     const result = await chat.sendMessage(prompt);
     const response = result.response;
-    const story = response.text();
-
     const newStory = new Story({
       prompt,
-      story,
+      story: await chat.getHistory(),
     });
     await newStory.save();
+    return newStory;
   } catch (error: any) {
     console.error('Error generating or saving story:', error.message);
+    return null;
   }
 };

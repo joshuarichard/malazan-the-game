@@ -1,21 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
-import Item, { IItem } from './Item';
-import { ItemTypes, EquipableSlots } from '@items/types';
+import EquipableItem, { IEquipableItem } from './EquipableItem';
+import { ItemTypes } from '@items/types';
 
-export interface IWeapon extends IItem {
+export interface IWeapon extends IEquipableItem {
   itemType: ItemTypes.Weapon;
-  equipmentSlot: EquipableSlots;
   baseDamage: number;
 }
 
 const WeaponSchema: Schema = new Schema({
-  equipmentSlot: {
-    type: String,
-    enum: Object.values(EquipableSlots),
-    required: true,
-  },
   baseDamage: { type: Number, required: true, default: 0 },
 });
 
-const Weapon = Item.discriminator<IWeapon>('Weapon', WeaponSchema);
+const Weapon = EquipableItem.discriminator<IWeapon>('Weapon', WeaponSchema);
 export default Weapon;

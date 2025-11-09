@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx ts-node src/game-engine/entry.ts",
+    "start": "npx ts-node -r tsconfig-paths/register src/game-engine/entry.ts",
     "newstory": "npx ts-node -r tsconfig-paths/register src/game-engine/entry.ts --generate-story"
   },
   "author": "",
@@ -12,15 +12,15 @@
   "description": "",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "@types/mongoose": "^5.11.96",
-    "@types/readline-sync": "^1.4.8",
     "dotenv": "^17.2.3",
     "mongoose": "^8.19.2",
     "readline-sync": "^1.4.10",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^24.9.1",
+    "@types/readline-sync": "^1.4.8",
     "tsconfig-paths": "^4.2.0"
   }
 }
